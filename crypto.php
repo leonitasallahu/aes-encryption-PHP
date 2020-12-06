@@ -29,5 +29,17 @@ class Crypto {
 	
 		return $ciphertext64;
 	}
+	
+	private static function base64_url_encode($str) {
+		return strtr(base64_encode($str), '+/', '-_');
+	}
+
+	public static function sign($data, $key) {
+		return hash_hmac('sha256', $data, $key);
+	}
+	
+	private static function base64_url_decode($str) {
+		return base64_decode(strtr($str, '-_', '+/'));
+	}
 }
 ?>
